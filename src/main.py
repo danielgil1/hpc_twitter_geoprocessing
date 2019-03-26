@@ -14,8 +14,11 @@ def getGrid(p):
 		# 	result.append(key)
 		# if value.contains(point):
 		# 	result.append(key)
-	print(point, " in ", result)
-	return sorted(result)[0]
+	#print(point, " in ", result)
+	if result:
+		return sorted(result)[0]
+	else:
+		return "Z1" # filter this tweets
 
 
 def readMap():
@@ -29,7 +32,9 @@ def readMap():
 
 def main():
 	readMap()
-	print(getGrid([144.850000, -37.600000])) # horizontal overlap
+	#print(getGrid([144.850000, -37.600000])) # horizontal overlap
+	
+	print(getGrid([144.92340088, -37.95935781]))
 	# print(getGrid((144.850000, -37.650000))) # four box overlap
 	# print(getGrid((145.400000, -38.000000))) #inside box
 	# print(getGrid((145.300000, -38.100000))) # Vertical overlap
