@@ -77,6 +77,8 @@ def df_count_hashtags(df):
 		coordinates = row['doc.coordinates.coordinates']
 		hashtags = row['doc.entities.hashtags']
 		grid_name = getGrid(coordinates)
+		if not grid_name:
+			continue
 		for hashtag in hashtags:
 			grid_dict[grid_name][hashtag['text'].lower()] += 1
 
@@ -87,6 +89,8 @@ def count_posts(df):
 	grid_dict = Counter()
 	for index, row in df.iterrows():
 		grid_name = getGrid(row['doc.coordinates.coordinates'])
+		if not grid_name:
+			continue 
 		grid_dict[grid_name] += 1
 
 	return grid_dict
