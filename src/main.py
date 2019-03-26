@@ -15,7 +15,7 @@ def getGrid(p):
 	if result:
 		return sorted(result)[0]
 	else:
-		return "Z1" # filter this tweets
+		return None
 
 
 def readMap():
@@ -32,6 +32,36 @@ def load(filename):
 		data = json.load(f)
 
 	return data
+
+def load_alternate(filename):
+	post_counts = Counter()
+	grid_dict = defaultdict(Counter)
+	with open(filename, encoding="utf8") as f:
+		f.readline()
+		count = 1
+		for line in f:
+			try:
+				if line.strip()[-1] == ',':
+					data = json.loads(line.strip()[:-1])
+				else:
+					data = json.loads(line.strip())
+			except:
+				print(count, line)
+			count = count + 1
+			if getGrid(data['value']['geometry']['coordinates']) and len(data['doc']['entities']['hashtags']) > 0:
+				# print(data['doc']['entities']['hashtags'])
+				post_counts[getGrid(data['value']['geometry']['coordinates'])] += 1
+				hashtags = data['doc']['entities']['hashtags']
+				grid_name = getGrid(data['value']['geometry']['coordinates'])
+				for hashtag in hashtags:
+					grid_dict[grid_name][hashtag['text']] += 1
+
+
+	for grid in post_counts.most_common():
+		print(grid[0],":",grid[1],"posts")
+	print("***************************")
+	for grid in post_counts.most_common():
+		print(grid[0], ":", grid_dict[grid[0]].most_common(5))
 
 
 def preprocess(json_data):
@@ -63,15 +93,16 @@ def count_posts(df):
 
 def main():
 	filename = "../data/smallTwitter.json"
-	df = preprocess(load(filename))
+	# df = preprocess(load(filename))
 	readMap()
-	counts = count_posts(df)
-	hashtag_counts = df_count_hashtags(df)
-	for grid in counts.most_common():
-		print(grid[0],":",grid[1],"posts")
-	print("***************************")
-	for grid in counts.most_common():
-		print(grid[0], ":", hashtag_counts[grid[0]].most_common(5))
+	load_alternate(filename)
+	# counts = count_posts(df)
+	# hashtag_counts = df_count_hashtags(df)
+	# for grid in counts.most_common():
+	# 	print(grid[0],":",grid[1],"posts")
+	# print("***************************")
+	# for grid in counts.most_common():
+	# 	print(grid[0], ":", hashtag_counts[grid[0]].most_common(5))
 	# print(getGrid([144.850000, -37.600000])) # horizontal overlap
 	# print(getGrid([144.92340088, -37.95935781]))
 	# print(getGrid((144.850000, -37.650000))) # four box overlap
