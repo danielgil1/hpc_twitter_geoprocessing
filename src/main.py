@@ -34,7 +34,7 @@ def load(filename):
 	return data
 
 
-def load_alternate(filename):
+def lineByLine(filename):
 	post_counts = Counter()
 	hashtag_counts = defaultdict(Counter)
 	with open(filename, encoding="utf8") as f:
@@ -56,12 +56,7 @@ def load_alternate(filename):
 				for hashtag in hashtags:
 					hashtag_counts[grid_name][hashtag['text']] += 1
 
-
-	for grid in post_counts.most_common():
-		print(grid[0],":",grid[1],"posts")
-	print("***************************")
-	for grid in post_counts.most_common():
-		print(grid[0], ":", hashtag_counts[grid[0]].most_common(5))
+	return post_counts, hashtag_counts
 
 
 def preprocess(json_data):
@@ -95,20 +90,30 @@ def count_posts(df):
 
 	return grid_dict
 
+
+def dataFrameApproach(filename):
+	df = preprocess(load(filename))
+	counts = count_posts(df)
+	hashtag_counts = df_count_hashtags(df)
+
+	return counts, hashtag_counts
+
+
 def main():
 	filename = "../data/smallTwitter.json"
-	# df = preprocess(load(filename))
 	readMap()
-	load_alternate(filename)
+
+	# line by line approach
+	# counts, hashtag_counts = lineByLine(filename)
 
 	## Counts using dataframe
-	# counts = count_posts(df)
-	# hashtag_counts = df_count_hashtags(df)
-	# for grid in counts.most_common():
-	# 	print(grid[0],":",grid[1],"posts")
-	# print("***************************")
-	# for grid in counts.most_common():
-	# 	print(grid[0], ":", hashtag_counts[grid[0]].most_common(5))
+	counts, hashtag_counts = dataFrameApproach(filename)
+
+	for grid in counts.most_common():
+		print(grid[0],":",grid[1],"posts")
+	print("***************************")
+	for grid in counts.most_common():
+		print(grid[0], ":", hashtag_counts[grid[0]].most_common(5))
 
 	## Check grid location
 	# print(getGrid([144.850000, -37.600000])) # horizontal overlap
