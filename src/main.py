@@ -34,7 +34,7 @@ def load(filename):
 	return data
 
 
-def lineByLine(filename):
+def lineByLineApproach(filename):
 	post_counts = Counter()
 	hashtag_counts = defaultdict(Counter)
 	with open(filename, encoding="utf8") as f:
@@ -104,7 +104,7 @@ def main():
 	readMap()
 
 	# line by line approach
-	# counts, hashtag_counts = lineByLine(filename)
+	# counts, hashtag_counts = lineByLineApproach(filename)
 
 	## Counts using dataframe
 	counts, hashtag_counts = dataFrameApproach(filename)
