@@ -34,6 +34,13 @@ def load(filename):
 	return data
 
 
+def preprocess(json_data):
+	df_raw = pd.DataFrame.from_dict(json_normalize(json_data['rows']), orient='columns')
+	return df_raw[
+		(df_raw['value.properties.location'] == 'melbourne') & (len(df_raw['doc.coordinates.coordinates']) > 0) & (
+					len(df_raw['doc.entities.hashtags']) > 0)][['doc.coordinates.coordinates', 'doc.entities.hashtags']]
+
+
 def lineByLineApproach(filename):
 	post_counts = Counter()
 	hashtag_counts = defaultdict(Counter)
@@ -59,44 +66,21 @@ def lineByLineApproach(filename):
 	return post_counts, hashtag_counts
 
 
-def preprocess(json_data):
-	df_raw = pd.DataFrame.from_dict(json_normalize(json_data['rows']), orient='columns')
-	return df_raw[
-		(df_raw['value.properties.location'] == 'melbourne') & (len(df_raw['doc.coordinates.coordinates']) > 0) & (
-					len(df_raw['doc.entities.hashtags']) > 0)][['doc.coordinates.coordinates', 'doc.entities.hashtags']]
+def dataFrameApproach(filename):
+	df = preprocess(load(filename))
+	count_hashtags = defaultdict(Counter)
+	count_posts = Counter()
 
-
-def df_count_hashtags(df):
-	grid_dict = defaultdict(Counter)
 	for index, row in df.iterrows():
 		coordinates = row['doc.coordinates.coordinates']
 		hashtags = row['doc.entities.hashtags']
 		grid_name = getGrid(coordinates)
-		if not grid_name:
-			continue
-		for hashtag in hashtags:
-			grid_dict[grid_name][hashtag['text'].lower()] += 1
+		if grid_name:
+			count_posts[grid_name] += 1
+			for hashtag in hashtags:
+				count_hashtags[grid_name][hashtag['text']] += 1
 
-	return grid_dict
-
-
-def count_posts(df):
-	grid_dict = Counter()
-	for index, row in df.iterrows():
-		grid_name = getGrid(row['doc.coordinates.coordinates'])
-		if not grid_name:
-			continue 
-		grid_dict[grid_name] += 1
-
-	return grid_dict
-
-
-def dataFrameApproach(filename):
-	df = preprocess(load(filename))
-	counts = count_posts(df)
-	hashtag_counts = df_count_hashtags(df)
-
-	return counts, hashtag_counts
+	return count_posts, count_hashtags
 
 
 def main():
