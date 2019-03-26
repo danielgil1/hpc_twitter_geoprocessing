@@ -78,7 +78,7 @@ def df_count_hashtags(df):
 		hashtags = row['doc.entities.hashtags']
 		grid_name = getGrid(coordinates)
 		for hashtag in hashtags:
-			grid_dict[grid_name][hashtag['text']] += 1
+			grid_dict[grid_name][hashtag['text'].lower()] += 1
 
 	return grid_dict
 
