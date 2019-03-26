@@ -58,7 +58,7 @@ def lineByLineApproach(filename):
 			count = count + 1
 			hashtags = data['doc']['entities']['hashtags']
 			grid_name = getGrid(data['value']['geometry']['coordinates'])
-			if  grid_name and len(hashtags) > 0:
+			if grid_name and len(hashtags) > 0:
 				post_counts[grid_name] += 1
 				for hashtag in hashtags:
 					hashtag_counts[grid_name][hashtag['text']] += 1
@@ -75,7 +75,7 @@ def dataFrameApproach(filename):
 		coordinates = row['doc.coordinates.coordinates']
 		hashtags = row['doc.entities.hashtags']
 		grid_name = getGrid(coordinates)
-		if grid_name:
+		if grid_name and len(hashtags) > 0:
 			count_posts[grid_name] += 1
 			for hashtag in hashtags:
 				count_hashtags[grid_name][hashtag['text']] += 1
@@ -91,7 +91,7 @@ def main():
 	# counts, hashtag_counts = lineByLineApproach(filename)
 
 	## Counts using dataframe
-	# counts, hashtag_counts = dataFrameApproach(filename)
+	counts, hashtag_counts = dataFrameApproach(filename)
 
 	for grid in counts.most_common():
 		print(grid[0],":",grid[1],"posts")
