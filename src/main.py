@@ -33,9 +33,10 @@ def load(filename):
 
 	return data
 
+
 def load_alternate(filename):
 	post_counts = Counter()
-	grid_dict = defaultdict(Counter)
+	hashtag_counts = defaultdict(Counter)
 	with open(filename, encoding="utf8") as f:
 		f.readline()
 		count = 1
@@ -49,19 +50,18 @@ def load_alternate(filename):
 				print(count, line)
 			count = count + 1
 			if getGrid(data['value']['geometry']['coordinates']) and len(data['doc']['entities']['hashtags']) > 0:
-				# print(data['doc']['entities']['hashtags'])
 				post_counts[getGrid(data['value']['geometry']['coordinates'])] += 1
 				hashtags = data['doc']['entities']['hashtags']
 				grid_name = getGrid(data['value']['geometry']['coordinates'])
 				for hashtag in hashtags:
-					grid_dict[grid_name][hashtag['text']] += 1
+					hashtag_counts[grid_name][hashtag['text']] += 1
 
 
 	for grid in post_counts.most_common():
 		print(grid[0],":",grid[1],"posts")
 	print("***************************")
 	for grid in post_counts.most_common():
-		print(grid[0], ":", grid_dict[grid[0]].most_common(5))
+		print(grid[0], ":", hashtag_counts[grid[0]].most_common(5))
 
 
 def preprocess(json_data):
@@ -96,6 +96,8 @@ def main():
 	# df = preprocess(load(filename))
 	readMap()
 	load_alternate(filename)
+
+	## Counts using dataframe
 	# counts = count_posts(df)
 	# hashtag_counts = df_count_hashtags(df)
 	# for grid in counts.most_common():
@@ -103,6 +105,8 @@ def main():
 	# print("***************************")
 	# for grid in counts.most_common():
 	# 	print(grid[0], ":", hashtag_counts[grid[0]].most_common(5))
+
+	## Check grid location
 	# print(getGrid([144.850000, -37.600000])) # horizontal overlap
 	# print(getGrid([144.92340088, -37.95935781]))
 	# print(getGrid((144.850000, -37.650000))) # four box overlap
