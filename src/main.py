@@ -54,7 +54,7 @@ def lineByLineApproach(filename):
 				else:
 					data = json.loads(line.strip())
 			except:
-				print(count, line)
+				continue
 			count = count + 1
 			hashtags = data['doc']['entities']['hashtags']
 			grid_name = getGrid(data['value']['geometry']['coordinates'])
