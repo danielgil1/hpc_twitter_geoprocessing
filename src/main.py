@@ -61,7 +61,7 @@ def lineByLineApproach(filename):
 			if grid_name and len(hashtags) > 0:
 				post_counts[grid_name] += 1
 				for hashtag in hashtags:
-					hashtag_counts[grid_name][hashtag['text']] += 1
+					hashtag_counts[grid_name][hashtag['text'].lower()] += 1
 
 	return post_counts, hashtag_counts
 
@@ -78,7 +78,7 @@ def dataFrameApproach(filename):
 		if grid_name and len(hashtags) > 0:
 			count_posts[grid_name] += 1
 			for hashtag in hashtags:
-				count_hashtags[grid_name][hashtag['text']] += 1
+				count_hashtags[grid_name][hashtag['text'].lower()] += 1
 
 	return count_posts, count_hashtags
 
@@ -88,10 +88,10 @@ def main():
 	readMap()
 
 	# line by line approach
-	# counts, hashtag_counts = lineByLineApproach(filename)
+	counts, hashtag_counts = lineByLineApproach(filename)
 
 	## Counts using dataframe
-	counts, hashtag_counts = dataFrameApproach(filename)
+	# counts, hashtag_counts = dataFrameApproach(filename)
 
 	for grid in counts.most_common():
 		print(grid[0],":",grid[1],"posts")
