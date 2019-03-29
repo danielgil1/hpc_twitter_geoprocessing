@@ -7,16 +7,19 @@ from collections import Counter, defaultdict
 grids = dict()
 
 def getGrid(p):
-	point = Point(p)
-	result = list()
-	for key, value in grids.items():
-		if value.intersects(point):
-			result.append(key)
-	if result:
-		return sorted(result)[0]
+	if(p):
+		point = Point(p)
+		result = list()
+		for key, value in grids.items():
+			if value.intersects(point):
+				result.append(key)
+		if result:
+			return sorted(result)[0]
+		else:
+			return None
 	else:
+		print(p)
 		return None
-
 
 def readMap():
 	filename = "../data/melbGrid.json"
@@ -54,14 +57,20 @@ def lineByLineApproach(filename):
 				else:
 					data = json.loads(line.strip())
 			except:
-				print(count, line)
+				continue
 			count = count + 1
+			if count % 10000 == 0:
+				print(count)
 			hashtags = data['doc']['entities']['hashtags']
-			grid_name = getGrid(data['value']['geometry']['coordinates'])
-			if grid_name and len(hashtags) > 0:
+			# print(data)
+			try:
+				grid_name = getGrid(data['doc']['coordinates']['coordinates'])
+			except:
+				continue
+			if grid_name:
 				post_counts[grid_name] += 1
 				for hashtag in hashtags:
-					hashtag_counts[grid_name][hashtag['text']] += 1
+					hashtag_counts[grid_name][hashtag['text'].lower()] += 1
 
 	return post_counts, hashtag_counts
 
@@ -75,10 +84,10 @@ def dataFrameApproach(filename):
 		coordinates = row['doc.coordinates.coordinates']
 		hashtags = row['doc.entities.hashtags']
 		grid_name = getGrid(coordinates)
-		if grid_name and len(hashtags) > 0:
+		if grid_name:
 			count_posts[grid_name] += 1
 			for hashtag in hashtags:
-				count_hashtags[grid_name][hashtag['text']] += 1
+				count_hashtags[grid_name][hashtag['text'].lower()] += 1
 
 	return count_posts, count_hashtags
 
@@ -88,10 +97,10 @@ def main():
 	readMap()
 
 	# line by line approach
-	# counts, hashtag_counts = lineByLineApproach(filename)
+	counts, hashtag_counts = lineByLineApproach(filename)
 
 	## Counts using dataframe
-	counts, hashtag_counts = dataFrameApproach(filename)
+	# counts, hashtag_counts = dataFrameApproach(filename)
 
 	for grid in counts.most_common():
 		print(grid[0],":",grid[1],"posts")
@@ -108,4 +117,9 @@ def main():
 
 
 if __name__ == "__main__":
+	# x = None
+	# if x:
+	# 	print("1")
+	# else:
+	# 	print("2")
 	main()
