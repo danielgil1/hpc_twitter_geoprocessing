@@ -1,0 +1,3 @@
+$ showq | less #jobs running
+$ module avail | less
+$ module list
