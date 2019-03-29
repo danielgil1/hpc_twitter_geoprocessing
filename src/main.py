@@ -7,16 +7,19 @@ from collections import Counter, defaultdict
 grids = dict()
 
 def getGrid(p):
-	point = Point(p)
-	result = list()
-	for key, value in grids.items():
-		if value.intersects(point):
-			result.append(key)
-	if result:
-		return sorted(result)[0]
+	if(p):
+		point = Point(p)
+		result = list()
+		for key, value in grids.items():
+			if value.intersects(point):
+				result.append(key)
+		if result:
+			return sorted(result)[0]
+		else:
+			return None
 	else:
+		print(p)
 		return None
-
 
 def readMap():
 	filename = "../data/melbGrid.json"
@@ -56,8 +59,14 @@ def lineByLineApproach(filename):
 			except:
 				continue
 			count = count + 1
+			if count % 10000 == 0:
+				print(count)
 			hashtags = data['doc']['entities']['hashtags']
-			grid_name = getGrid(data['value']['geometry']['coordinates'])
+			# print(data)
+			try:
+				grid_name = getGrid(data['doc']['coordinates']['coordinates'])
+			except:
+				continue
 			if grid_name:
 				post_counts[grid_name] += 1
 				for hashtag in hashtags:
@@ -84,7 +93,7 @@ def dataFrameApproach(filename):
 
 
 def main():
-	filename = "../data/tinyTwitter.json"
+	filename = "../data/smallTwitter.json"
 	readMap()
 
 	# line by line approach
@@ -108,4 +117,9 @@ def main():
 
 
 if __name__ == "__main__":
+	# x = None
+	# if x:
+	# 	print("1")
+	# else:
+	# 	print("2")
 	main()
