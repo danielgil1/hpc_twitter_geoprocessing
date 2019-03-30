@@ -95,8 +95,8 @@ def lineByLineApproach(filename):
 			except:
 				continue
 			count = count + 1
-			if count % 10000 == 0:
-				print(count)
+			# if count % 100000 == 0:
+			# 	print(count)
 			hashtags = data['doc']['entities']['hashtags']
 			# print(data)
 			try:
@@ -129,14 +129,14 @@ def dataFrameApproach(filename):
 
 
 def main():
-	filename = "../data/tinyTwitter.json"
+	filename = "../data/smallTwitter.json"
 	readMap()
 
 	# line by line approach
 	counts, hashtag_counts = lineByLineApproach(filename)
 
 	# Counts using dataframe
-	counts, hashtag_counts = dataFrameApproach(filename)
+	# counts, hashtag_counts = dataFrameApproach(filename)
 
 	for grid in counts.most_common():
 		print(grid[0],":",grid[1],"posts")
@@ -153,9 +153,4 @@ def main():
 
 
 if __name__ == "__main__":
-	# x = None
-	# if x:
-	# 	print("1")
-	# else:
-	# 	print("2")
 	main()
