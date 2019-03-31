@@ -1,12 +1,25 @@
 import json
 import pandas as pd
-from shapely.geometry import shape, Point
+# from shapely.geometry import shape, Point
 from pandas.io.json import json_normalize
 from collections import Counter, defaultdict
 
-grids = dict()
+# grids = dict()
+grids = list()
 
-def getGrid(p):
+class Grid:
+	def __init__(self, id, xmin, xmax, ymin, ymax):
+		self.id = id
+		self.xmin = xmin
+		self.xmax = xmax
+		self.ymin = ymin
+		self.ymax = ymax
+
+	def check_grid(self, x, y):
+		return (x >= self.xmin and x <= self.xmax) and(y >= self.ymin and y <= self.ymax)
+
+
+def getGrid1(p):
 	if(p):
 		point = Point(p)
 		result = list()
@@ -18,10 +31,25 @@ def getGrid(p):
 		else:
 			return None
 	else:
-		print(p)
+		#print(p)
 		return None
 
-def readMap():
+def getGrid(p):
+	if(p):
+		result = list()
+		for grid in grids:
+			if grid.check_grid(p[0], p[1]):
+				result.append(grid.id)
+		if result:
+			return sorted(result)[0]
+		else:
+			return None
+
+	else:
+		#print(p)
+		return None
+
+def readMap2():
 	filename = "../data/melbGrid.json"
 	with open(filename) as f:
 		data = json.load(f)
@@ -29,12 +57,20 @@ def readMap():
 	for grid in data:
 		grids[grid['properties']['id']] = shape(json.loads(json.dumps(grid['geometry'])))
 
-
 def load(filename):
 	with open(filename, encoding="utf8") as f:
 		data = json.load(f)
 
 	return data
+
+
+def readMap():
+	filename = "../data/melbGrid.json"
+	with open(filename) as f:
+		data = json.load(f)
+	data = data['features']
+	for grid in data:
+		grids.append(Grid(grid['properties']['id'], grid['properties']['xmin'], grid['properties']['xmax'], grid['properties']['ymin'], grid['properties']['ymax']))
 
 
 def preprocess(json_data):
@@ -59,8 +95,8 @@ def lineByLineApproach(filename):
 			except:
 				continue
 			count = count + 1
-			if count % 10000 == 0:
-				print(count)
+			# if count % 100000 == 0:
+			# 	print(count)
 			hashtags = data['doc']['entities']['hashtags']
 			# print(data)
 			try:
@@ -99,7 +135,7 @@ def main():
 	# line by line approach
 	counts, hashtag_counts = lineByLineApproach(filename)
 
-	## Counts using dataframe
+	# Counts using dataframe
 	# counts, hashtag_counts = dataFrameApproach(filename)
 
 	for grid in counts.most_common():
@@ -117,9 +153,4 @@ def main():
 
 
 if __name__ == "__main__":
-	# x = None
-	# if x:
-	# 	print("1")
-	# else:
-	# 	print("2")
 	main()
