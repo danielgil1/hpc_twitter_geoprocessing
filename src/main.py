@@ -3,7 +3,7 @@ import pandas as pd
 # from shapely.geometry import shape, Point
 from pandas.io.json import json_normalize
 from collections import Counter, defaultdict
-
+import os
 # grids = dict()
 grids = list()
 
