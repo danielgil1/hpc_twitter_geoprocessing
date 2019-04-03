@@ -1,7 +1,7 @@
 import mpi4py
 from mpi4py import MPI
 import json
-
+import sys
 from collections import Counter, defaultdict
 
 import os
@@ -143,7 +143,7 @@ def slave_tweet_processor(comm, input_file):
 
 
 def readMap():
-  filename = "../melbGrid.json"
+  filename = "../data/melbGrid.json"
   with open(filename) as f:
     data = json.load(f)
   data = data['features']
@@ -152,14 +152,16 @@ def readMap():
               grid['properties']['ymin'], grid['properties']['ymax']))
 
 
-def main():
+def main(argv):
+
   # Get
-  input_file = "../smallTwitter.json"
+  input_file = "../data/"+argv[1]
 
   # Work out our rank, and run either master or slave process
   comm = MPI.COMM_WORLD
   rank = comm.Get_rank()
   size = comm.Get_size()
+  print("Runining with size:",size," Rank:",rank)
   readMap()
 
   if rank == 0:
@@ -174,4 +176,4 @@ def main():
 
 # Run the actual program
 if __name__ == "__main__":
-  main()
+  main(sys.argv)
