@@ -1,9 +1,8 @@
 import json
-import pandas as pd
-# from shapely.geometry import shape, Point
-from pandas.io.json import json_normalize
+import sys
 from collections import Counter, defaultdict
 import os
+
 # grids = dict()
 grids = list()
 
@@ -128,12 +127,12 @@ def dataFrameApproach(filename):
 	return count_posts, count_hashtags
 
 
-def main():
-	filename = "../data/bigTwitter.json"
+def main(argv):
+	input_file = "../data/" + argv[1]
 	readMap()
 
 	# line by line approach
-	counts, hashtag_counts = lineByLineApproach(filename)
+	counts, hashtag_counts = lineByLineApproach(input_file)
 
 	# Counts using dataframe
 	# counts, hashtag_counts = dataFrameApproach(filename)
@@ -153,4 +152,4 @@ def main():
 
 
 if __name__ == "__main__":
-	main()
+	main(sys.argv)
