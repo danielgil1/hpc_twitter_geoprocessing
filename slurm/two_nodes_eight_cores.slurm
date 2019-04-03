@@ -9,5 +9,5 @@
 module load Python/3.5.2-goolf-2015a
 
 # Launch multiple process python code
-echo "Searching for hashtags"
+echo "Searching for hashtags - 2 nodes 8 cores"
 time mpiexec -n 2 python3 main_p.py bigTwitter.json > two_nodes_eight_cores.out
