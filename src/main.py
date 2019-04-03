@@ -129,7 +129,7 @@ def dataFrameApproach(filename):
 
 
 def main():
-	filename = "../data/smallTwitter.json"
+	filename = "../data/bigTwitter.json"
 	readMap()
 
 	# line by line approach
