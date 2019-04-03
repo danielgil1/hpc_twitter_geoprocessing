@@ -130,7 +130,7 @@ def slave_tweet_processor(comm, input_file):
 
   # counts = process_tweets(rank, input_file, size)
   post_counts, hastag_counts = process_tweets(rank, input_file, size)
-  print("Rank:", rank, "Post count:", post_counts)
+  # print("Rank:", rank, "Post count:", post_counts)
   # Now that we have our counts then wait to see when we return them.
   while True:
     in_comm = comm.recv(source=MASTER_RANK, tag=rank)
@@ -166,11 +166,11 @@ def main():
 
   if rank == 0:
     # We are master
-    print("Sending to master, rank=", rank, "size=", size)
+    # print("Sending to master, rank=", rank, "size=", size)
     master_tweet_processor(comm, input_file)
   else:
     # We are slave
-    print("Sending to slave, rank=", rank, "size=", size)
+    # print("Sending to slave, rank=", rank, "size=", size)
     slave_tweet_processor(comm, input_file)
 
 
