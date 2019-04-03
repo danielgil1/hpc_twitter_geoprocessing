@@ -113,11 +113,11 @@ def master_tweet_processor(comm, input_file):
     comm.send('exit', dest=(i + 1), tag=(i + 1))
 
   # Print output
-  for grid in total_count_posts.most_common():
-    print(grid[0],":",grid[1],"posts")
-  print("***************************")
-  for grid in total_count_posts.most_common():
-    print(grid[0], ":", total_count_hashtags[grid[0]].most_common(5))
+  # for grid in total_count_posts.most_common():
+  #   print(grid[0],":",grid[1],"posts")
+  # print("***************************")
+  # for grid in total_count_posts.most_common():
+  #   print(grid[0], ":", total_count_hashtags[grid[0]].most_common(5))
 
 
 def slave_tweet_processor(comm, input_file):
