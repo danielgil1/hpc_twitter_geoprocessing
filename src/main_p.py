@@ -1,9 +1,7 @@
 import mpi4py
 from mpi4py import MPI
 import json
-import pandas as pd
-# from shapely.geometry import shape, Point
-from pandas.io.json import json_normalize
+
 from collections import Counter, defaultdict
 
 import os
@@ -145,7 +143,7 @@ def slave_tweet_processor(comm, input_file):
 
 
 def readMap():
-  filename = "../data/melbGrid.json"
+  filename = "../melbGrid.json"
   with open(filename) as f:
     data = json.load(f)
   data = data['features']
@@ -156,7 +154,7 @@ def readMap():
 
 def main():
   # Get
-  input_file = "../data/smallTwitter.json"
+  input_file = "../smallTwitter.json"
 
   # Work out our rank, and run either master or slave process
   comm = MPI.COMM_WORLD
