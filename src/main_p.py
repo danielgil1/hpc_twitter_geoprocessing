@@ -3,6 +3,7 @@ from mpi4py import MPI
 import json
 import sys
 from collections import Counter, defaultdict
+import time
 
 import os
 
@@ -176,4 +177,9 @@ def main(argv):
 
 # Run the actual program
 if __name__ == "__main__":
+  start = time.time()
   main(sys.argv)
+  end = time.time()
+  hours, rem = divmod(end - start, 3600)
+  minutes, seconds = divmod(rem, 60)
+  print("Time Elapsed :","{:0>2}:{:0>2}:{:05.2f}".format(int(hours), int(minutes), seconds))
