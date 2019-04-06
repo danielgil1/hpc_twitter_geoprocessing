@@ -1,6 +1,6 @@
 #!/bin/bash
 #SBATCH --nodes=1
-#SBATCH --ntasks=8
+#SBATCH --ntasks=4
 #SBATCH --time=0-00:04:00
 #SBATCH --partition=physical
 #SBATCH --account=comp90024
