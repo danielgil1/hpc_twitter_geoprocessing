@@ -71,7 +71,7 @@ def process_tweets(rank, input_file, size):
 		post_counts = Counter()
 		hashtag_counts = defaultdict(Counter)
 
-		# Send tweets to slave processes
+		# read the file
 		for (i, line) in enumerate(f):
 			if i % size == rank:
 				try:
@@ -92,6 +92,8 @@ def process_tweets(rank, input_file, size):
 					for hashtag in hashtags:
 						hashtag_counts[grid_name][hashtag['text'
 						].lower()] += 1
+		
+		print ("Total: i",i)
 
 	return (post_counts, hashtag_counts)
 
@@ -120,12 +122,16 @@ def master_tweet_processor(comm, input_file):
 	for i in range(size - 1):
 		# Receive data
 		comm.send('exit', dest=i + 1, tag=i + 1)
+	
+	print_results(total_count_posts,total_count_hashtags)
 
-	# for grid in total_count_posts.most_common():
-	# 	print(grid[0],":",grid[1],"posts")
-	# print("***************************")
-	# for grid in total_count_posts.most_common():
-	# 	print(grid[0], ":", total_count_hashtags[grid[0]].most_common(5))
+
+def print_results(total_count_posts,total_count_hashtags):
+	for grid in total_count_posts.most_common():
+		print(grid[0],":",grid[1],"posts")
+		print("***************************")
+		#for grid in total_count_posts.most_common():
+		print(grid[0], ":", total_count_hashtags[grid[0]].most_common(5))
 
 
 def slave_tweet_processor(comm, input_file):
@@ -143,7 +149,6 @@ def slave_tweet_processor(comm, input_file):
 		if isinstance(in_comm, str):
 			if in_comm in 'return_data':
 				# Send data back
-				# print("Process: ", rank, " sending back ", len(counts), " items")
 				comm.send((post_counts, hastag_counts), dest=MASTER_RANK, tag=MASTER_RANK)
 			elif in_comm in 'exit':
 				exit(0)
@@ -169,7 +174,7 @@ def main(argv):
 	comm = MPI.COMM_WORLD
 	rank = comm.Get_rank()
 	size = comm.Get_size()
-	print('Runining with size:', size, ' Rank:', rank)
+	#print('Runining with size:', size, ' Rank:', rank)
 	readMap()
 
 	if rank == 0:

@@ -5,7 +5,8 @@
 #SBATCH --partition=physical
 #SBATCH --account=comp90024
 
-# Load required modules
+# Load required modules Python/3.6.4-intel-2017.u2
 module load Python/3.5.2-goolf-2015a
 # Launch multiple process python code
-mpiexec python3 main_p.py bigTwitter.json
+time mpiexec python3 main_sg.py bigTwitter.json
+echo "1 node 1 core"
