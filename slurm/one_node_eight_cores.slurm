@@ -9,5 +9,5 @@
 module load Python/3.5.2-goolf-2015a
 
 # Launch multiple process python code
-time mpiexec python3 main_sg.py bigTwitter.json
+time mpiexec python3 main_p.py bigTwitter.json
 echo "1 node 8 cores"
