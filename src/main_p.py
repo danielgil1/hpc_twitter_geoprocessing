@@ -92,8 +92,6 @@ def process_tweets(rank, input_file, size):
 					for hashtag in hashtags:
 						hashtag_counts[grid_name][hashtag['text'
 						].lower()] += 1
-		
-		print ("Total: i",i)
 
 	return (post_counts, hashtag_counts)
 
@@ -129,8 +127,8 @@ def master_tweet_processor(comm, input_file):
 def print_results(total_count_posts,total_count_hashtags):
 	for grid in total_count_posts.most_common():
 		print(grid[0],":",grid[1],"posts")
-		print("***************************")
-		#for grid in total_count_posts.most_common():
+	print("***************************")
+	for grid in total_count_posts.most_common():
 		print(grid[0], ":", total_count_hashtags[grid[0]].most_common(5))
 
 
