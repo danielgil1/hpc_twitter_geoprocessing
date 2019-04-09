@@ -6,6 +6,7 @@ import json
 import sys
 from collections import Counter, defaultdict
 import time
+import re
 
 MASTER_RANK = 0
 grids = list()
@@ -54,7 +55,10 @@ def getGrid(p):
 		for grid in grids:
 			if grid.check_grid(p[0], p[1]):
 				result.append(grid.id)
-		if result:
+		grids_no = len(result)
+		if grids_no == 1:
+			return result[0]
+		elif grids_no > 1:
 			return sorted(result)[0]
 		else:
 			return None
@@ -88,12 +92,11 @@ def process_tweets(rank, input_file, size):
 					continue
 				if grid_name:
 					post_counts[grid_name] += 1
-					hashtags = data['doc']['entities']['hashtags']
+					hashtags = re.findall(r"(?<=\s)#\S+(?=\s)", data['doc']['text'])
 					for hashtag in hashtags:
-						hashtag_counts[grid_name][hashtag['text'
-						].lower()] += 1
+						hashtag_counts[grid_name][hashtag.lower()] += 1
 
-	return (post_counts, hashtag_counts)
+	return post_counts, hashtag_counts
 
 
 def master_tweet_processor(comm, input_file):
@@ -110,7 +113,6 @@ def master_tweet_processor(comm, input_file):
 		for worker_count in counts:
 			total_count_posts = total_count_posts + worker_count[0]
 			for (gridHashKey, gridHashDict) in worker_count[1].items():
-
 				for (hashtag, hashtag_count) in gridHashDict.items():
 					total_count_hashtags[gridHashKey][hashtag] = \
 						total_count_hashtags[gridHashKey][hashtag] \
