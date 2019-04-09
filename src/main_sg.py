@@ -89,7 +89,7 @@ def main(argv):
     comm = MPI.COMM_WORLD
     rank = comm.Get_rank()
     size = comm.Get_size()
-    #print('Runining with size:', size, ' Rank:', rank)
+    print('Runining with size:', size, ' Rank:', rank)
     readMap() 
     data = None
     chunks = [] 

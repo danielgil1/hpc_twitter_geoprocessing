@@ -10,4 +10,7 @@ module load Python/3.5.2-goolf-2015a
 
 # Launch multiple process python code
 time mpiexec python3 main_p.py bigTwitter.json
-echo "1 node 2 cores"
+echo "1 node 2 cores - Point-to-Point Communication"
+echo "----------------------------------------------"
+time mpiexec python3 main_sg.py bigTwitter.json
+echo "1 node 2 cores - Collective Communication"
