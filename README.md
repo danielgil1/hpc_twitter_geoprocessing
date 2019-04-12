@@ -1,5 +1,5 @@
 # hpc_twitter_geoprocessing
-HPC processing
+HPC - Twitter geoprocessing
 
-Login:
-ssh your-unimelb-username@spartan.hpc.unimelb.edu.au
+To run the program:
+$ ./runme.sh
