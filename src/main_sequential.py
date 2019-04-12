@@ -2,6 +2,7 @@ import json
 import sys
 from collections import Counter, defaultdict
 import os
+import re
 
 # grids = dict()
 grids = list()
@@ -96,8 +97,7 @@ def lineByLineApproach(filename):
 			count = count + 1
 			# if count % 100000 == 0:
 			# 	print(count)
-			hashtags = data['doc']['entities']['hashtags']
-			# print(data)
+			hashtags = re.findall(r"(?<=\s)#\S+(?=\s)", data['doc']['text'])
 			try:
 				grid_name = getGrid(data['doc']['coordinates']['coordinates'])
 			except:
@@ -105,7 +105,7 @@ def lineByLineApproach(filename):
 			if grid_name:
 				post_counts[grid_name] += 1
 				for hashtag in hashtags:
-					hashtag_counts[grid_name][hashtag['text'].lower()] += 1
+					hashtag_counts[grid_name][hashtag.lower()] += 1
 
 	return post_counts, hashtag_counts
 
@@ -128,6 +128,7 @@ def dataFrameApproach(filename):
 
 
 def main(argv):
+
 	input_file = "../data/" + argv[1]
 	readMap()
 

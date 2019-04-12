@@ -9,9 +9,11 @@ import os
 import re
 
 MASTER_RANK = 0
+
+# Saving grid information in a global list
 grids = list()
 
-
+# Data Structure for Grids
 class Grid:
 
 	def __init__(
@@ -33,24 +35,25 @@ class Grid:
 			   and y <= self.ymax
 
 
+# Get grid of a lat-log point
 def getGrid(p):
 	if p:
 		result = list()
 		for grid in grids:
 			if grid.check_grid(p[0], p[1]):
 				result.append(grid.id)
-		if result:
+		grids_no = len(result)
+		if grids_no == 1:
+			return result[0]
+		elif grids_no > 1:
 			return sorted(result)[0]
 		else:
 			return None
 	else:
-
-		# print(p)
-
 		return None
 
 
-
+# Read map file and save it to global list
 def readMap():
     filename = '../data/melbGrid.json'
     with open(filename) as f:
@@ -63,6 +66,7 @@ def readMap():
                           ]['ymax']))
 
 
+# Split the file in chunks
 def get_chunks(input_file,size):
     chunks=list()
     total_lines=int(os.popen('wc -l '+input_file).readline().split()[0])-1
@@ -82,6 +86,16 @@ def get_chunks(input_file,size):
     
     return chunks
 
+
+# print result
+def print_results(total_count_posts,total_count_hashtags):
+	for grid in total_count_posts.most_common():
+		print(grid[0],":",grid[1],"posts")
+		print("***************************")
+		#for grid in total_count_posts.most_common():
+		print(grid[0], ":", total_count_hashtags[grid[0]].most_common(5))
+
+
 def main(argv):
     # Get
     input_file = '../data/' + argv[1]
@@ -90,27 +104,19 @@ def main(argv):
     comm = MPI.COMM_WORLD
     rank = comm.Get_rank()
     size = comm.Get_size()
-    print('Runining with size:', size, ' Rank:', rank)
+    # print('Runining with size:', size, ' Rank:', rank)
     readMap() 
     data = None
     chunks = [] 
     
     if rank==0:
         chunks=get_chunks(input_file,size)
-        
     else:
         chunks=None
-    
-    
     my_chunk=comm.scatter(chunks,root=0)
-    
-    #print("I'm core",str(rank)+"and my chunk is ",str(my_chunk))
-    init,end=my_chunk
-
-    
+    init, end = my_chunk
     post_counts = Counter()
     hashtag_counts = defaultdict(Counter)
-
     with open(input_file, encoding='utf8') as f:
         f.readline()
         for (i, line) in enumerate(f):
@@ -123,8 +129,7 @@ def main(argv):
                 except:
                     continue
                 try:
-                    grid_name = getGrid(data['doc']['coordinates'
-										]['coordinates'])
+                    grid_name = getGrid(data['doc']['coordinates']['coordinates'])
                 except:
                     continue
                 if grid_name:
@@ -149,16 +154,7 @@ def main(argv):
                     + hashtag_count
     
         # print
-        # print_results(total_count_posts,total_count_hashtags)
-    
-    
-
-def print_results(total_count_posts,total_count_hashtags):
-	for grid in total_count_posts.most_common():
-		print(grid[0],":",grid[1],"posts")
-		print("***************************")
-		#for grid in total_count_posts.most_common():
-		print(grid[0], ":", total_count_hashtags[grid[0]].most_common(5))
+        print_results(total_count_posts,total_count_hashtags)
         
 
 if __name__ == '__main__':

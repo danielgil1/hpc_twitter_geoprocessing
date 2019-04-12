@@ -9,9 +9,11 @@ import time
 import re
 
 MASTER_RANK = 0
+
+# Saving grid information in a global list
 grids = list()
 
-
+# Data Structure for Grids
 class Grid:
 
 	def __init__(
@@ -33,22 +35,7 @@ class Grid:
 			   and y <= self.ymax
 
 
-def marshall_tweets(comm):
-	processes = comm.Get_size()
-	counts = []
-
-	# Now ask all processes except oursevles to return counts
-	for i in range(processes - 1):
-		# Send request
-		comm.send('return_data', dest=i + 1, tag=i + 1)
-
-	for i in range(processes - 1):
-		# Receive data
-		counts.append(comm.recv(source=i + 1, tag=MASTER_RANK))
-
-	return counts
-
-
+# Get grid of a lat-log point
 def getGrid(p):
 	if p:
 		result = list()
@@ -63,12 +50,38 @@ def getGrid(p):
 		else:
 			return None
 	else:
-
-		# print(p)
-
 		return None
 
 
+# Read map file and save it to global list
+def readMap():
+	filename = '../data/melbGrid.json'
+	with open(filename) as f:
+		data = json.load(f)
+	data = data['features']
+	for grid in data:
+		grids.append(Grid(grid['properties']['id'], grid['properties'
+		]['xmin'], grid['properties']['xmax'],
+						  grid['properties']['ymin'], grid['properties'
+						  ]['ymax']))
+
+
+# Marshall Tweets from all processes
+def marshall_tweets(comm):
+	processes = comm.Get_size()
+	counts = []
+	# Now ask all processes except oursevles to return counts
+	for i in range(processes - 1):
+		# Send request
+		comm.send('return_data', dest=i + 1, tag=i + 1)
+	for i in range(processes - 1):
+		# Receive data
+		counts.append(comm.recv(source=i + 1, tag=MASTER_RANK))
+
+	return counts
+
+
+# Process tweets line by line and count post and hashtags if in grid
 def process_tweets(rank, input_file, size):
 	with open(input_file, encoding='utf8') as f:
 		f.readline()
@@ -99,6 +112,7 @@ def process_tweets(rank, input_file, size):
 	return post_counts, hashtag_counts
 
 
+# Merging results
 def master_tweet_processor(comm, input_file):
 	# Read our tweets
 	rank = comm.Get_rank()
@@ -122,18 +136,10 @@ def master_tweet_processor(comm, input_file):
 	for i in range(size - 1):
 		# Receive data
 		comm.send('exit', dest=i + 1, tag=i + 1)
-	
 	print_results(total_count_posts,total_count_hashtags)
 
 
-def print_results(total_count_posts,total_count_hashtags):
-	for grid in total_count_posts.most_common():
-		print(grid[0],":",grid[1],"posts")
-	print("***************************")
-	for grid in total_count_posts.most_common():
-		print(grid[0], ":", total_count_hashtags[grid[0]].most_common(5))
-
-
+# Count tweets by slave
 def slave_tweet_processor(comm, input_file):
 	# We want to process all relevant tweets and send our counts back
 	# to master when asked
@@ -154,27 +160,24 @@ def slave_tweet_processor(comm, input_file):
 				exit(0)
 
 
-def readMap():
-	filename = '../data/melbGrid.json'
-	with open(filename) as f:
-		data = json.load(f)
-	data = data['features']
-	for grid in data:
-		grids.append(Grid(grid['properties']['id'], grid['properties'
-		]['xmin'], grid['properties']['xmax'],
-						  grid['properties']['ymin'], grid['properties'
-						  ]['ymax']))
+# Print results
+def print_results(total_count_posts,total_count_hashtags):
+	for grid in total_count_posts.most_common():
+		print(grid[0],":",grid[1],"posts")
+	print("***************************")
+	for grid in total_count_posts.most_common():
+		print(grid[0], ":", total_count_hashtags[grid[0]].most_common(5))
 
 
 def main(argv):
-	# Get
+	# Get Input file
 	input_file = '../data/' + argv[1]
 
 	# Work out our rank, and run either master or slave process
 	comm = MPI.COMM_WORLD
 	rank = comm.Get_rank()
 	size = comm.Get_size()
-	#print('Runining with size:', size, ' Rank:', rank)
+	print('Runining with size:', size, ' Rank:', rank)
 	readMap()
 
 	if rank == 0:
