@@ -171,7 +171,7 @@ def print_results(total_count_posts,total_count_hashtags):
 
 def main(argv):
 	# Get Input file
-	input_file = '../data/' + argv[1]
+	input_file = argv[1]
 
 	# Work out our rank, and run either master or slave process
 	comm = MPI.COMM_WORLD
