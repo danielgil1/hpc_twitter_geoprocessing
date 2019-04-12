@@ -6,6 +6,7 @@ import sys
 from collections import Counter, defaultdict
 import time
 import os
+import re
 
 MASTER_RANK = 0
 grids = list()
@@ -128,11 +129,9 @@ def main(argv):
                     continue
                 if grid_name:
                     post_counts[grid_name] += 1
-                    hashtags = data['doc']['entities']['hashtags']
+                    hashtags = re.findall(r"(?<=\s)#\S+(?=\s)", data['doc']['text'])
                     for hashtag in hashtags:
-                        hashtag_counts[grid_name][hashtag['text'].lower()] += 1      
-
-    
+                        hashtag_counts[grid_name][hashtag.lower()] += 1
    
     counts=comm.gather((post_counts, hashtag_counts),root=0)
 
@@ -150,7 +149,7 @@ def main(argv):
                     + hashtag_count
     
         # print
-        print_results(total_count_posts,total_count_hashtags)
+        # print_results(total_count_posts,total_count_hashtags)
     
     
 
