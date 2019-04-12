@@ -1,0 +1,94 @@
+Runining with size: 8  Rank: 2
+Runining with size: 8  Rank: 7
+Runining with size: 8  Rank: 5
+Runining with size: 8  Rank: 6
+Runining with size: 8  Rank: 0
+Runining with size: 8  Rank: 1
+Runining with size: 8  Rank: 3
+Runining with size: 8  Rank: 4
+C2 : 145096 posts
+B2 : 79633 posts
+C3 : 53299 posts
+B3 : 26550 posts
+C4 : 19699 posts
+B1 : 16507 posts
+D4 : 14497 posts
+D3 : 13388 posts
+C1 : 8427 posts
+B4 : 5450 posts
+A3 : 5036 posts
+A2 : 4165 posts
+C5 : 4106 posts
+D5 : 3248 posts
+A1 : 2533 posts
+A4 : 310 posts
+***************************
+C2 : [('#melbourne', 10399), ('#australia', 1537), ('#job', 1390), ('#jobs', 964), ('#melbourne…', 505)]
+B2 : [('#melbourne', 840), ('#australia', 156), ('#auspol', 149), ('#nashsnewvideo', 123), ('#brunswick', 94)]
+C3 : [('#melbourne', 489), ('#australia', 145), ('#coffee', 102), ('#oneorigin_specialtycoffee', 71), ('#food', 70)]
+B3 : [('#melbourne', 168), ('#australia', 60), ('#fitness', 55), ('#pocus', 50), ('#britonedirection', 42)]
+C4 : [('#alishas1million', 96), ('#vote5sos', 85), ('#melbourne', 82), ('#auspol', 75), ('#savedallas', 46)]
+B1 : [('#melbourne', 176), ('#kca', 72), ('#australia', 60), ('#vote5sos', 55), ('#bds', 49)]
+D4 : [('#nowplaying', 1730), ('#melbourne', 30), ('#dandenong.', 27), ('#job', 26), ('#jobs', 22)]
+D3 : [('#melbourne', 80), ('#beach', 60), ('#summer', 29), ('#joesuggtofollowconniekirk', 28), ('#australia', 23)]
+C1 : [('#jackfollowme', 104), ('#jackdm', 90), ('#camto4mill', 72), ('#christmasfollowparty', 62), ('#jamesyamm', 58)]
+B4 : [('#melbourne', 33), ('#smallzywelcomeshome5sos', 26), ('#vicfires', 19), ('#fire', 19), ('#socialmedia', 18)]
+A3 : [('#vicfires', 19), ('#saveconstantine', 12), ('#epping.', 11), ('#girls', 11), ('#love', 8)]
+A2 : [('#krazykristmas', 165), ('#egsholidaygiveaway', 57), ('#rcl1milliongiveaway', 53), ('#vdaywithbeth', 37), ('#egholidaygiveaway', 31)]
+C5 : [('#melbourne', 53), ('#australia', 17), ('#dandenongs', 14), ('#travel', 13), ('#1000steps', 12)]
+D5 : [('#cat,', 25), ('#somebodytocon', 23), ('#melbourne', 22), ('#lost', 20), ('#voteukvampettes', 18)]
+A1 : [('#melbourne', 14), ('#tattoo', 11), ('#worldjudo2014', 9), ('#design', 8), ('#my', 8)]
+A4 : [('#lnp', 4), ('#birthday', 3), ('#qldvotes', 3), ('#vicfires', 3), ('#community', 2)]
+Time Elapsed : 00:01:01.91
+
+real	1m2.168s
+user	7m38.347s
+sys	0m37.560s
+1 node 8 cores - Point-to-Point Communication
+----------------------------------------------
+Time Elapsed : 00:01:01.47
+Time Elapsed : 00:01:01.47
+Time Elapsed : 00:01:01.47
+Time Elapsed : 00:01:01.47
+Time Elapsed : 00:01:01.47
+Time Elapsed : 00:01:01.47
+Time Elapsed : 00:01:01.47
+C2 : 145096 posts
+B2 : 79633 posts
+C3 : 53299 posts
+B3 : 26550 posts
+C4 : 19699 posts
+B1 : 16507 posts
+D4 : 14497 posts
+D3 : 13388 posts
+C1 : 8427 posts
+B4 : 5450 posts
+A3 : 5036 posts
+A2 : 4165 posts
+C5 : 4106 posts
+D5 : 3248 posts
+A1 : 2533 posts
+A4 : 310 posts
+***************************
+C2 : [('#melbourne', 10399), ('#australia', 1537), ('#job', 1390), ('#jobs', 964), ('#melbourne…', 505)]
+B2 : [('#melbourne', 840), ('#australia', 156), ('#auspol', 149), ('#nashsnewvideo', 123), ('#brunswick', 94)]
+C3 : [('#melbourne', 489), ('#australia', 145), ('#coffee', 102), ('#oneorigin_specialtycoffee', 71), ('#food', 70)]
+B3 : [('#melbourne', 168), ('#australia', 60), ('#fitness', 55), ('#pocus', 50), ('#health', 42)]
+C4 : [('#alishas1million', 96), ('#vote5sos', 85), ('#melbourne', 82), ('#auspol', 75), ('#savedallas', 46)]
+B1 : [('#melbourne', 176), ('#kca', 72), ('#australia', 60), ('#vote5sos', 55), ('#bds', 49)]
+D4 : [('#nowplaying', 1730), ('#melbourne', 30), ('#dandenong.', 27), ('#job', 26), ('#jobs', 22)]
+D3 : [('#melbourne', 80), ('#beach', 60), ('#summer', 29), ('#joesuggtofollowconniekirk', 28), ('#australia', 23)]
+C1 : [('#jackfollowme', 104), ('#jackdm', 90), ('#camto4mill', 72), ('#christmasfollowparty', 62), ('#jamesyamm', 58)]
+B4 : [('#melbourne', 33), ('#smallzywelcomeshome5sos', 26), ('#vicfires', 19), ('#fire', 19), ('#socialmedia', 18)]
+A3 : [('#vicfires', 19), ('#saveconstantine', 12), ('#girls', 11), ('#epping.', 11), ('#love', 8)]
+A2 : [('#krazykristmas', 165), ('#egsholidaygiveaway', 57), ('#rcl1milliongiveaway', 53), ('#vdaywithbeth', 37), ('#egholidaygiveaway', 31)]
+C5 : [('#melbourne', 53), ('#australia', 17), ('#dandenongs', 14), ('#travel', 13), ('#1000steps', 12)]
+D5 : [('#cat,', 25), ('#somebodytocon', 23), ('#melbourne', 22), ('#lost', 20), ('#voteukvampettes', 18)]
+A1 : [('#melbourne', 14), ('#tattoo', 11), ('#worldjudo2014', 9), ('#judo', 8), ('#design', 8)]
+A4 : [('#lnp', 4), ('#qldvotes', 3), ('#vicfires', 3), ('#birthday', 3), ('#market', 2)]
+Time Elapsed : 00:01:01.60
+
+real	1m2.204s
+user	7m27.719s
+sys	0m44.883s
+1 node 8 cores - Collective Communication
