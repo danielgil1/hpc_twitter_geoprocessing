@@ -1,0 +1,11 @@
+
+real	3m17.374s
+user	3m10.494s
+sys	0m6.665s
+1 node 1 core - Point-to-Point Communication
+----------------------------------------------
+
+real	3m22.796s
+user	3m12.784s
+sys	0m7.184s
+1 node 1 core - Collective Communication

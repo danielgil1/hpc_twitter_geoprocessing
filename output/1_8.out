@@ -1,11 +1,11 @@
-Runining with size: 8  Rank: 5
-Runining with size: 8  Rank: 2
-Runining with size: 8  Rank: 7
+Runining with size: 8  Rank: 6
 Runining with size: 8  Rank: 0
 Runining with size: 8  Rank: 1
+Runining with size: 8  Rank: 2
 Runining with size: 8  Rank: 3
+Runining with size: 8  Rank: 5
+Runining with size: 8  Rank: 7
 Runining with size: 8  Rank: 4
-Runining with size: 8  Rank: 6
 C2 : 145096 posts
 B2 : 79633 posts
 C3 : 53299 posts
@@ -33,20 +33,20 @@ D4 : [('#nowplaying', 1730), ('#melbourne', 30), ('#dandenong.', 27), ('#job', 2
 D3 : [('#melbourne', 80), ('#beach', 60), ('#summer', 29), ('#joesuggtofollowconniekirk', 28), ('#australia', 23)]
 C1 : [('#jackfollowme', 104), ('#jackdm', 90), ('#camto4mill', 72), ('#christmasfollowparty', 62), ('#jamesyamm', 58)]
 B4 : [('#melbourne', 33), ('#smallzywelcomeshome5sos', 26), ('#fire', 19), ('#vicfires', 19), ('#socialmedia', 18)]
-A3 : [('#vicfires', 19), ('#saveconstantine', 12), ('#girls', 11), ('#epping.', 11), ('#love', 8)]
-A2 : [('#krazykristmas', 165), ('#egsholidaygiveaway', 57), ('#rcl1milliongiveaway', 53), ('#vdaywithbeth', 37), ('#egholidaygiveaway', 31)]
+A3 : [('#vicfires', 19), ('#saveconstantine', 12), ('#epping.', 11), ('#girls', 11), ('#love', 8)]
+A2 : [('#krazykristmas', 165), ('#egsholidaygiveaway', 57), ('#rcl1milliongiveaway', 53), ('#vdaywithbeth', 37), ('#craigieburn.', 31)]
 C5 : [('#melbourne', 53), ('#australia', 17), ('#dandenongs', 14), ('#travel', 13), ('#1000steps', 12)]
 D5 : [('#cat,', 25), ('#somebodytocon', 23), ('#melbourne', 22), ('#lost', 20), ('#voteukvampettes', 18)]
-A1 : [('#melbourne', 14), ('#tattoo', 11), ('#worldjudo2014', 9), ('#my', 8), ('#judo', 8)]
-A4 : [('#lnp', 4), ('#qldvotes', 3), ('#birthday', 3), ('#vicfires', 3), ('#market', 2)]
-Time Elapsed : 00:00:57.05
-Time Elapsed : 00:00:59.68
-Time Elapsed : 00:00:59.68
-Time Elapsed : 00:00:59.68
-Time Elapsed : 00:00:59.68
-Time Elapsed : 00:00:59.68
-Time Elapsed : 00:00:59.68
-Time Elapsed : 00:00:59.68
+A1 : [('#melbourne', 14), ('#tattoo', 11), ('#worldjudo2014', 9), ('#judo', 8), ('#drawing', 8)]
+A4 : [('#lnp', 4), ('#qldvotes', 3), ('#vicfires', 3), ('#birthday', 3), ('#community', 2)]
+Time Elapsed : 00:00:56.36
+Time Elapsed : 00:00:57.49
+Time Elapsed : 00:00:57.49
+Time Elapsed : 00:00:57.49
+Time Elapsed : 00:00:57.49
+Time Elapsed : 00:00:57.49
+Time Elapsed : 00:00:57.49
+Time Elapsed : 00:00:57.50
 C2 : 145096 posts
 B2 : 79633 posts
 C3 : 53299 posts
@@ -73,11 +73,11 @@ B1 : [('#melbourne', 176), ('#kca', 72), ('#australia', 60), ('#vote5sos', 55), 
 D4 : [('#nowplaying', 1730), ('#melbourne', 30), ('#dandenong.', 27), ('#job', 26), ('#jobs', 22)]
 D3 : [('#melbourne', 80), ('#beach', 60), ('#summer', 29), ('#joesuggtofollowconniekirk', 28), ('#australia', 23)]
 C1 : [('#jackfollowme', 104), ('#jackdm', 90), ('#camto4mill', 72), ('#christmasfollowparty', 62), ('#jamesyamm', 58)]
-B4 : [('#melbourne', 33), ('#smallzywelcomeshome5sos', 26), ('#fire', 19), ('#vicfires', 19), ('#socialmedia', 18)]
+B4 : [('#melbourne', 33), ('#smallzywelcomeshome5sos', 26), ('#vicfires', 19), ('#fire', 19), ('#socialmedia', 18)]
 A3 : [('#vicfires', 19), ('#saveconstantine', 12), ('#epping.', 11), ('#girls', 11), ('#love', 8)]
-A2 : [('#krazykristmas', 165), ('#egsholidaygiveaway', 57), ('#rcl1milliongiveaway', 53), ('#vdaywithbeth', 37), ('#craigieburn.', 31)]
+A2 : [('#krazykristmas', 165), ('#egsholidaygiveaway', 57), ('#rcl1milliongiveaway', 53), ('#vdaywithbeth', 37), ('#egholidaygiveaway', 31)]
 C5 : [('#melbourne', 53), ('#australia', 17), ('#dandenongs', 14), ('#travel', 13), ('#1000steps', 12)]
 D5 : [('#cat,', 25), ('#somebodytocon', 23), ('#melbourne', 22), ('#lost', 20), ('#voteukvampettes', 18)]
-A1 : [('#melbourne', 14), ('#tattoo', 11), ('#worldjudo2014', 9), ('#design', 8), ('#my', 8)]
-A4 : [('#lnp', 4), ('#qldvotes', 3), ('#birthday', 3), ('#vicfires', 3), ('#market', 2)]
-Time Elapsed : 00:00:59.79
+A1 : [('#melbourne', 14), ('#tattoo', 11), ('#worldjudo2014', 9), ('#design', 8), ('#vobis', 8)]
+A4 : [('#lnp', 4), ('#vicfires', 3), ('#birthday', 3), ('#qldvotes', 3), ('#community', 2)]
+Time Elapsed : 00:00:57.62
