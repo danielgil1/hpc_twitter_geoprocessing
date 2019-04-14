@@ -3,7 +3,7 @@ HPC - Twitter geoprocessing - Cluster and Cloud Computing
 
 #### src file introduction
 
-./src/main -> First basic sequential approach without MPI. Which is just dataframe approach for small twitter files and a line by line approach for Big Twitter file
+./src/main_sequential -> First basic sequential approach without MPI. Which is just dataframe approach for small twitter files and a line by line approach for Big Twitter file
 
 ./src/main_p -> Point to Point Appcoach using MPI
 
